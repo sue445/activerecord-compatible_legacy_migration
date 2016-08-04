@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'activerecord/compatible_legacy_migration/version'
+require 'active_record/compatible_legacy_migration/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "activerecord-compatible_legacy_migration"
-  spec.version       = Activerecord::CompatibleLegacyMigration::VERSION
+  spec.version       = ActiveRecord::CompatibleLegacyMigration::VERSION
   spec.authors       = ["sue445"]
   spec.email         = ["sue445@sue445.net"]
 
