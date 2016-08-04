@@ -24,9 +24,25 @@ Or install it yourself as:
 
     $ gem install activerecord-compatible_legacy_migration
 
-## Usage
+## Usecase
+* gem including migration file (e.g. mountable engine)
 
-TODO: Write usage instructions here
+## Usage
+Use `ActiveRecord::CompatibleLegacyMigration.migration_class` instead of `ActiveRecord::Migration`
+
+### Example
+
+```ruby
+class CreateUsers < ActiveRecord::CompatibleLegacyMigration.migration_class
+  def change
+    create_table :users do |t|
+      t.timestamps null: false
+    end
+  end
+end
+```
+
+see [ActiveRecord::CompatibleLegacyMigration](lib/active_record/compatible_legacy_migration.rb)
 
 ## Development
 
