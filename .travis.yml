@@ -1,0 +1,26 @@
+language: ruby
+rvm:
+- 2.2.5
+- 2.3.1
+- ruby-head
+gemfile:
+- gemfiles/rails_4_2.gemfile
+- gemfiles/rails_5_0.gemfile
+cache: bundler
+sudo: false
+before_install: gem install bundler -v 1.12.5
+before_script:
+- export CODECLIMATE_REPO_TOKEN=87a9b1085def76711dabebf564293d7907986c6adb0a92233bceaaf4b212687d
+- export CI=true
+script:
+- bundle exec rspec
+branches:
+  only:
+  - master
+notifications:
+  email: false
+  slack:
+    secure: A0voR9CpjyAbwo/8l3YytjvUacNe/6KQuCn0F6g711bbsmDdQiv+DYSuLcDpvq6y8o0QGFdJ2UgPtP3nkG96bFyhmbm6CfpERgwR+/1Hg5Tovw3lFny5ud1Y9xfFUQI7apmp4HkUatxIU7/0rjmqPHIXMugyv6dv4qqADJ0ma5H+CLlyIvrqXRZrFzUWqFn1/pfkfb7jahZ0MIk5NBAvAmvupaV5GEGzWHlM3/xdIQYijbYoveaKBaRe//Sj98EzGxwBMKrJjkSFuUBoano6GGc4IZ6B6yHfEfSziW0hp3+dqGBCugXThAWLyNxAeBrWd30eRsUMgVe33ry4gaszktrcoKx+CcMUyniKLUqFP/Y/f0fkvr6P2i8GctYKbY+tMgfeDAC6F0PET6nkx+e8xQYt+HqywiqXMjLUQSXE7Uw4n/0O/8QkB3Ylzr4gmSIezBeZM4+FDClWQyqd6V0LE15sD4+4s+QKtnJXazoD3pFj5lYLGfc4nYyRCy1MlgezjQ90Ji8Ol4POLLZbJgEmkgIhyr4nus64kLfFhSTwpCtFKq8FqkJIIO381cFlWb+EsO4a4rWVOVPe2niKp7+fO9L2l46ZSoqAEP2dvC9uhERDOe38ZzL3g1zKiisSYpvO+zO8k0vjpJJEm8DDtqpdWjRxtcaAW+XyGHFLEUFcgJ4=
+matrix:
+  allow_failures:
+  - rvm: ruby-head
