@@ -1,0 +1,1 @@
+require "active_record/compatible_legacy_migration"
