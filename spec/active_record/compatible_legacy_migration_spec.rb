@@ -1,5 +1,5 @@
 describe ActiveRecord::CompatibleLegacyMigration do
-  describe "#migration_class" do
+  describe "db:migrate" do
     before do
       create_db
     end
