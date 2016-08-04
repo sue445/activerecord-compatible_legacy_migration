@@ -1,9 +1,8 @@
 # ActiveRecord::CompatibleLegacyMigration
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/activerecord/compatible_legacy_migration`. To experiment with that code, run `bin/console` for an interactive prompt.
+Compatible migration file between Rails 4.2 and 5+
 
-TODO: Delete this and the text above, and describe your gem
-
+[![Gem Version](https://badge.fury.io/rb/activerecord-compatible_legacy_migration.svg)](https://badge.fury.io/rb/activerecord-compatible_legacy_migration)
 [![Build Status](https://travis-ci.org/sue445/activerecord-compatible_legacy_migration.svg?branch=master)](https://travis-ci.org/sue445/activerecord-compatible_legacy_migration)
 [![Code Climate](https://codeclimate.com/github/sue445/activerecord-compatible_legacy_migration/badges/gpa.svg)](https://codeclimate.com/github/sue445/activerecord-compatible_legacy_migration)
 [![Coverage Status](https://coveralls.io/repos/github/sue445/activerecord-compatible_legacy_migration/badge.svg?branch=master)](https://coveralls.io/github/sue445/activerecord-compatible_legacy_migration?branch=master)
@@ -37,7 +36,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/activerecord-compatible_legacy_migration.
+Bug reports and pull requests are welcome on GitHub at https://github.com/sue445/activerecord-compatible_legacy_migration.
 
 
 ## License
