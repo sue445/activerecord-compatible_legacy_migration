@@ -129,4 +129,8 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  config.after do
+    ActiveRecord::CompatibleLegacyMigration.config.default_version = ActiveRecord::CompatibleLegacyMigration::Configuration::DEFAULT_VERSION
+  end
 end
