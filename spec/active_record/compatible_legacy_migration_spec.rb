@@ -19,7 +19,15 @@ describe ActiveRecord::CompatibleLegacyMigration do
     end
 
     context "when 5.0.0 <= ActiveRecord.version", if: Gem::Version.new("5.0.0") <= ActiveRecord.version do
-      it { should eq ActiveRecord::Migration[4.2] }
+      [4.2, 5.0].each do |version|
+        context "when config.default_version is #{version}" do
+          before do
+            ActiveRecord::CompatibleLegacyMigration.config.default_version = version
+          end
+
+          it { should eq ActiveRecord::Migration[version] }
+        end
+      end
     end
   end
 end

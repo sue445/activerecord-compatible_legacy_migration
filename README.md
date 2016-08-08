@@ -42,7 +42,26 @@ class CreateUsers < ActiveRecord::CompatibleLegacyMigration.migration_class
 end
 ```
 
+`ActiveRecord::CompatibleLegacyMigration.migration_class` returns `ActiveRecord::Migration` when `activerecord` 4.x
+and returns `ActiveRecord::Migration[4.2]` when `activerecord` 5.0+
+
 see [ActiveRecord::CompatibleLegacyMigration](lib/active_record/compatible_legacy_migration.rb)
+
+## Configurations
+### Usage
+```ruby
+ActiveRecord::CompatibleLegacyMigration.config.default_version = 4.2
+```
+
+or
+
+```ruby
+ActiveRecord::CompatibleLegacyMigration.configure do |config|
+  config.default_version = 4.2
+end
+```
+
+* `default_version` : default migration version for `activerecord` 5.0+ (default: `4.2`)
 
 ## Development
 
