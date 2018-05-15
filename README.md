@@ -6,7 +6,6 @@ Compatible migration file between Rails 4.2 and 5+
 [![Build Status](https://travis-ci.org/sue445/activerecord-compatible_legacy_migration.svg?branch=master)](https://travis-ci.org/sue445/activerecord-compatible_legacy_migration)
 [![Code Climate](https://codeclimate.com/github/sue445/activerecord-compatible_legacy_migration/badges/gpa.svg)](https://codeclimate.com/github/sue445/activerecord-compatible_legacy_migration)
 [![Coverage Status](https://coveralls.io/repos/github/sue445/activerecord-compatible_legacy_migration/badge.svg?branch=master)](https://coveralls.io/github/sue445/activerecord-compatible_legacy_migration?branch=master)
-[![Dependency Status](https://gemnasium.com/badges/github.com/sue445/activerecord-compatible_legacy_migration.svg)](https://gemnasium.com/github.com/sue445/activerecord-compatible_legacy_migration)
 
 ## Installation
 
