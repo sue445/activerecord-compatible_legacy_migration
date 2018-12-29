@@ -4,7 +4,7 @@ rvm:
   - 2.3
   - 2.4
   - 2.5
-  - 2.6.0
+  - 2.6
   - ruby-head
 gemfile:
   - gemfiles/activerecord_4_0.gemfile
@@ -34,6 +34,11 @@ notifications:
 matrix:
   allow_failures:
     - rvm: ruby-head
+  include:
+    - rvm: 2.6
+      env: RUBYOPT="--jit"
+    - rvm: ruby-head
+      env: RUBYOPT="--jit"
 env:
   global:
     - CC_TEST_REPORTER_ID=87a9b1085def76711dabebf564293d7907986c6adb0a92233bceaaf4b212687d
