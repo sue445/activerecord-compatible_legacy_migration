@@ -1,7 +1,9 @@
-ActiveRecord::Base.configurations["test"] = {
-  adapter:  "sqlite3",
-  database: File.join(__dir__, "test.sqlite3"),
-  timeout:  500
+ActiveRecord::Base.configurations = {
+  test: {
+    adapter:  "sqlite3",
+    database: File.join(__dir__, "test.sqlite3"),
+    timeout:  500
+  }
 }.with_indifferent_access
 
 ActiveRecord::Base.establish_connection(:test)
