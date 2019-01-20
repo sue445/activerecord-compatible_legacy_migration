@@ -32,5 +32,9 @@ end
 
 def up_migrate
   # db:migrate
-  ActiveRecord::Migrator.up(migrate_dir)
+  if ActiveRecord.version >= Gem::Version.create("5.2.0")
+    ActiveRecord::MigrationContext.new(migrate_dir).up
+  else
+    ActiveRecord::Migrator.up(migrate_dir)
+  end
 end
