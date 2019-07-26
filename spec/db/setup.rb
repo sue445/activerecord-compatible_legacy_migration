@@ -32,7 +32,9 @@ end
 
 def up_migrate
   # db:migrate
-  if ActiveRecord.version >= Gem::Version.create("5.2.0")
+  if ActiveRecord.version >= Gem::Version.create("6.0.0.rc2")
+    ActiveRecord::MigrationContext.new(migrate_dir, ActiveRecord::SchemaMigration).up
+  elsif ActiveRecord.version >= Gem::Version.create("5.2.0")
     ActiveRecord::MigrationContext.new(migrate_dir).up
   else
     ActiveRecord::Migrator.up(migrate_dir)
