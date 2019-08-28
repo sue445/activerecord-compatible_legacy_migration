@@ -74,16 +74,15 @@ jobs:
       - name: run test (with MJIT)
         run: |
           set -xe
-
-          if [[ "${{ matrix.ruby }}" > "v2.6." ]]; then
-            RUBYOPT=--jit bundle exec rspec
-          fi
+          RUBYOPT=--jit bundle exec rspec
         env:
           BUNDLE_GEMFILE: ${{ matrix.gemfile }}
           CI: "true"
+        if: matrix.ruby >= 'v2.6.0'
 
       - name: teardown cc-test-reporter
         run: |
           ./cc-test-reporter after-build --exit-code $?
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        if: always()
