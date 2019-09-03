@@ -89,3 +89,30 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         if: always()
+
+      - name: Slack Notification (not success)
+        uses: homoluctus/slatify@v1.0
+        if: "! success()"
+        with:
+          job_name: '*build*'
+          type: ${{ job.status }}
+          channel: ${{ secrets.SLACK_CHANNEL }}
+          icon_emoji: ":octocat:"
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  notify:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Slack Notification (success)
+        uses: homoluctus/slatify@v1.0
+        if: always()
+        with:
+          job_name: '*build*'
+          type: ${{ job.status }}
+          channel: ${{ secrets.SLACK_CHANNEL }}
+          icon_emoji: ":octocat:"
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
