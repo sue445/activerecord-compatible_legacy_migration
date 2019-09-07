@@ -91,12 +91,11 @@ jobs:
         if: always()
 
       - name: Slack Notification (not success)
-        uses: homoluctus/slatify@v1.4
+        uses: homoluctus/slatify@v1.5
         if: "! success()"
         with:
           job_name: '*build*'
           type: ${{ job.status }}
-          channel: ${{ secrets.SLACK_CHANNEL }}
           icon_emoji: ":octocat:"
           url: ${{ secrets.SLACK_WEBHOOK }}
 
@@ -106,11 +105,10 @@ jobs:
 
     steps:
       - name: Slack Notification (success)
-        uses: homoluctus/slatify@v1.4
+        uses: homoluctus/slatify@v1.5
         if: always()
         with:
           job_name: '*build*'
           type: ${{ job.status }}
-          channel: ${{ secrets.SLACK_CHANNEL }}
           icon_emoji: ":octocat:"
           url: ${{ secrets.SLACK_WEBHOOK }}
