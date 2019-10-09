@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: "0 19 * * 5" # JST 4:00 (Sat)
 
+env:
+  CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+  CI: "true"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,6 +35,9 @@ jobs:
           - ruby:    v2.4.x
             gemfile: gemfiles/rails_6_0.gemfile
 
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+
     steps:
       - uses: actions/checkout@v1
       - name: Set up Ruby
@@ -54,8 +61,6 @@ jobs:
         run: |
           set -xe
           bundle install --jobs 4 --retry 3
-        env:
-          BUNDLE_GEMFILE: ${{ matrix.gemfile }}
 
       - name: setup cc-test-reporter
         run: |
@@ -63,31 +68,21 @@ jobs:
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
       - name: run test
         run: |
           set -xe
           bundle exec rspec
-        env:
-          BUNDLE_GEMFILE: ${{ matrix.gemfile }}
-          CI: "true"
 
       - name: run test (with MJIT)
         run: |
           set -xe
           RUBYOPT=--jit bundle exec rspec
-        env:
-          BUNDLE_GEMFILE: ${{ matrix.gemfile }}
-          CI: "true"
         if: matrix.ruby >= 'v2.6.0'
 
       - name: teardown cc-test-reporter
         run: |
           ./cc-test-reporter after-build --exit-code $?
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         if: always()
 
       - name: Slack Notification (not success)
