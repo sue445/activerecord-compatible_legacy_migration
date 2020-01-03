@@ -92,15 +92,12 @@ jobs:
           RBENV_VERSION: ${{ matrix.ruby }}
         continue-on-error: ${{ endsWith(matrix.ruby, '-dev') }}
 
-      - name: Generate unique cache key
-        run: uuidgen > uuid.txt
-
       - name: Cache vendor/bundle
         uses: actions/cache@v1
         id: cache_gem
         with:
           path: vendor/bundle
-          key: v1-gem-${{ runner.os }}-${{ env.RBENV_VERSION }}-${{ hashFiles('uuid.txt') }}
+          key: v1-gem-${{ runner.os }}-${{ env.RBENV_VERSION }}-${{ github.sha }}
           restore-keys: |
             v1-gem-${{ runner.os }}-${{ env.RBENV_VERSION }}-
 
