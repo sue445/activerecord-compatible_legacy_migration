@@ -9,7 +9,7 @@ env:
   CI: "true"
 
 jobs:
-  build:
+  test:
     runs-on: ${{ matrix.runner }}
 
     strategy:
@@ -146,7 +146,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
   notify:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
