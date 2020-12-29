@@ -30,30 +30,30 @@ jobs:
           - ruby:2.7
           - ruby:3.0
         gemfile:
-          - rails_4_0.gemfile
-          - rails_4_1.gemfile
-          - rails_4_2.gemfile
-          - rails_5_0.gemfile
-          - rails_5_1.gemfile
-          - rails_5_2.gemfile
-          - rails_6_0.gemfile
+          - rails_4_0
+          - rails_4_1
+          - rails_4_2
+          - rails_5_0
+          - rails_5_1
+          - rails_5_2
+          - rails_6_0
         exclude:
           # Rails 6.0 requires Ruby 2.5+
           - ruby:    ruby:2.3
-            gemfile: rails_6_0.gemfile
+            gemfile: rails_6_0
           - ruby:    ruby:2.4
-            gemfile: rails_6_0.gemfile
+            gemfile: rails_6_0
 
           # Ruby 2.7.0 contains bundler 2.1.2, but Rails 4.x locks with bundler 1.x
           - ruby:    ruby:2.7
-            gemfile: rails_4_0.gemfile
+            gemfile: rails_4_0
           - ruby:    ruby:2.7
-            gemfile: rails_4_1.gemfile
+            gemfile: rails_4_1
           - ruby:    ruby:2.7
-            gemfile: rails_4_2.gemfile
+            gemfile: rails_4_2
 
     env:
-      BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}
+      BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
 
     steps:
       - uses: actions/checkout@v2
