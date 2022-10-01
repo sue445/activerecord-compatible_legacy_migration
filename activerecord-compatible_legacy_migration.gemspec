@@ -14,17 +14,11 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/sue445/activerecord-compatible_legacy_migration"
   spec.license       = "MIT"
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = spec.homepage
-    spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/master/CHANGELOG.md"
-    spec.metadata["rubygems_mfa_required"] = "true"
-  else
-    raise 'RubyGems 2.0 or newer is required to protect against ' \
-          'public gem pushes.'
-  end
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = spec.homepage
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/master/CHANGELOG.md"
+  spec.metadata["documentation_uri"] = "https://sue445.github.io/activerecord-compatible_legacy_migration/"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
@@ -40,4 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "yard"
 end
