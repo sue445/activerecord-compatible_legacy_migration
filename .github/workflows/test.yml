@@ -90,9 +90,9 @@ jobs:
         id: cache_gem
         with:
           path: vendor/bundle
-          key: v1-gem-${{ runner.os }}-${{ env.RBENV_VERSION }}-${{ github.sha }}
+          key: v1-gem-${{ runner.os }}-${{ matrix.ruby }}-${{ github.sha }}
           restore-keys: |
-            v1-gem-${{ runner.os }}-${{ env.RBENV_VERSION }}-
+            v1-gem-${{ runner.os }}-${{ matrix.ruby }}-
 
       - name: bundle update
         run: |
