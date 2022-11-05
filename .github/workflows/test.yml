@@ -16,20 +16,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    container: ${{ matrix.ruby }}
-
     strategy:
       fail-fast: false
 
       matrix:
         ruby:
-          - ruby:2.3
-          - ruby:2.4
-          - ruby:2.5
-          - ruby:2.6
-          - ruby:2.7
-          - ruby:3.0
-          - ruby:3.1
+          - "2.3"
+          - "2.4"
+          - "2.5"
+          - "2.6"
+          - "2.7"
+          - "3.0"
+          - "3.1"
         gemfile:
           - rails_4_0
           - rails_4_1
@@ -38,45 +36,55 @@ jobs:
           - rails_5_1
           - rails_5_2
           - rails_6_0
+
+        include:
+          # Rails 4.x requires bundler 1.x
+          - gemfile: rails_4_0
+            bundler: 1
+          - gemfile: rails_4_1
+            bundler: 1
+          - gemfile: rails_4_2
+            bundler: 1
+
         exclude:
           # Rails 6.0 requires Ruby 2.5+
-          - ruby:    ruby:2.3
+          - ruby:    "2.3"
             gemfile: rails_6_0
-          - ruby:    ruby:2.4
+          - ruby:    "2.4"
             gemfile: rails_6_0
 
           # Ruby 2.7.0 contains bundler 2.1.2, but Rails 4.x locks with bundler 1.x
-          - ruby:    ruby:2.7
+          - ruby:    "2.7"
             gemfile: rails_4_0
-          - ruby:    ruby:2.7
+          - ruby:    "2.7"
             gemfile: rails_4_1
-          - ruby:    ruby:2.7
+          - ruby:    "2.7"
             gemfile: rails_4_2
 
           # Rails 4.x and 5.x doesn't work on Ruby 3.0+
-          - ruby:    ruby:3.0
+          - ruby:    "3.0"
             gemfile: rails_4_0
-          - ruby:    ruby:3.0
+          - ruby:    "3.0"
             gemfile: rails_4_1
-          - ruby:    ruby:3.0
+          - ruby:    "3.0"
             gemfile: rails_4_2
-          - ruby:    ruby:3.0
+          - ruby:    "3.0"
             gemfile: rails_5_0
-          - ruby:    ruby:3.0
+          - ruby:    "3.0"
             gemfile: rails_5_1
-          - ruby:    ruby:3.0
+          - ruby:    "3.0"
             gemfile: rails_5_2
-          - ruby:    ruby:3.1
+          - ruby:    "3.1"
             gemfile: rails_4_0
-          - ruby:    ruby:3.1
+          - ruby:    "3.1"
             gemfile: rails_4_1
-          - ruby:    ruby:3.1
+          - ruby:    "3.1"
             gemfile: rails_4_2
-          - ruby:    ruby:3.1
+          - ruby:    "3.1"
             gemfile: rails_5_0
-          - ruby:    ruby:3.1
+          - ruby:    "3.1"
             gemfile: rails_5_1
-          - ruby:    ruby:3.1
+          - ruby:    "3.1"
             gemfile: rails_5_2
 
     env:
@@ -84,43 +92,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: apt-get install libsqlite3-dev -y
-      - name: Cache vendor/bundle
-        uses: actions/cache@v3
-        id: cache_gem
-        with:
-          path: vendor/bundle
-          key: v1-gem-${{ runner.os }}-${{ matrix.ruby }}-${{ github.sha }}
-          restore-keys: |
-            v1-gem-${{ runner.os }}-${{ matrix.ruby }}-
 
-      - name: bundle update
-        run: |
-          set -xe
-          bundle config path vendor/bundle
-          bundle update --jobs $(nproc) --retry 3
-        continue-on-error: ${{ matrix.allow_failures == 'true' }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          bundler: ${{ matrix.bundler || 'default' }}
+          cache-version: ${{ matrix.gemfile }}
+
+      - run: bundle update --jobs $(nproc) --retry 3
 
       - name: Setup Code Climate Test Reporter
         uses: aktions/codeclimate-test-reporter@v1
         with:
           codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
           command: before-build
-        if: matrix.ruby >= 'ruby:2.4'
         continue-on-error: true
 
-      - name: Run test
-        run: |
-          set -xe
-          bundle exec rspec
-        continue-on-error: ${{ matrix.allow_failures == 'true' }}
+      - run: bundle exec rspec
 
       - name: Teardown Code Climate Test Reporter
         uses: aktions/codeclimate-test-reporter@v1
         with:
           codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
           command: after-build
-        if: matrix.ruby >= 'ruby:2.4' && always()
+        if: always()
         continue-on-error: true
 
       - name: Slack Notification (not success)
