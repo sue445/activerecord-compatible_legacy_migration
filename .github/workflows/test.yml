@@ -36,6 +36,16 @@ jobs:
           - rails_5_1
           - rails_5_2
           - rails_6_0
+
+        include:
+          # Rails 4.x requires bundler 1.x
+          - gemfile: rails_4_0
+            bundler: 1
+          - gemfile: rails_4_1
+            bundler: 1
+          - gemfile: rails_4_2
+            bundler: 1
+
         exclude:
           # Rails 6.0 requires Ruby 2.5+
           - ruby:    "2.3"
@@ -87,6 +97,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+          bundler: ${{ matrix.bundler || 'default' }}
           cache-version: ${{ matrix.gemfile }}
 
       - run: bundle update --jobs $(nproc) --retry 3
