@@ -1,0 +1,7 @@
+if Gem::Version.create(RUBY_VERSION) < Gem::Version.create("2.4.0")
+  # FIXME: coveralls_reborn cannot be installed due to dependencies with json and rails 4.x
+  # c.f. https://github.com/sue445/activerecord-compatible_legacy_migration/actions/runs/3854778531/jobs/6569131703
+  gem "coveralls"
+else
+  gem "coveralls_reborn"
+end
