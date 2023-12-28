@@ -100,6 +100,18 @@ jobs:
             gemfile: rails_5_1
           - ruby:    "3.2"
             gemfile: rails_5_2
+          - ruby:    "3.3"
+            gemfile: rails_4_0
+          - ruby:    "3.3"
+            gemfile: rails_4_1
+          - ruby:    "3.3"
+            gemfile: rails_4_2
+          - ruby:    "3.3"
+            gemfile: rails_5_0
+          - ruby:    "3.3"
+            gemfile: rails_5_1
+          - ruby:    "3.3"
+            gemfile: rails_5_2
 
     env:
       BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
