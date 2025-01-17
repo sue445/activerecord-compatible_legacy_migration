@@ -3,7 +3,7 @@
 Compatible migration file between Rails 4.2 and 5+
 
 [![Gem Version](https://badge.fury.io/rb/activerecord-compatible_legacy_migration.svg)](https://badge.fury.io/rb/activerecord-compatible_legacy_migration)
-[![Build Status](https://github.com/sue445/activerecord-compatible_legacy_migration/workflows/test/badge.svg?branch=master)](https://github.com/sue445/activerecord-compatible_legacy_migration/actions?query=workflow%3Atest)
+[![test](https://github.com/sue445/activerecord-compatible_legacy_migration/actions/workflows/test.yml/badge.svg)](https://github.com/sue445/activerecord-compatible_legacy_migration/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/sue445/activerecord-compatible_legacy_migration/badges/gpa.svg)](https://codeclimate.com/github/sue445/activerecord-compatible_legacy_migration)
 [![Coverage Status](https://coveralls.io/repos/github/sue445/activerecord-compatible_legacy_migration/badge.svg?branch=master)](https://coveralls.io/github/sue445/activerecord-compatible_legacy_migration?branch=master)
 
