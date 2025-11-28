@@ -1,7 +1,7 @@
 ## unreleased
 [full changelog](http://github.com/sue445/activerecord-compatible_legacy_migration/compare/v0.1.3...master)
 
-## v0.1.3
+## [v0.1.3](https://github.com/sue445/activerecord-compatible_legacy_migration/releases/tag/v0.1.3)
 [full changelog](http://github.com/sue445/activerecord-compatible_legacy_migration/compare/v0.1.2...v0.1.3)
 
 * Release gem from GitHub Actions
