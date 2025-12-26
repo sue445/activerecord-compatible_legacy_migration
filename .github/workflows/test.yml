@@ -155,7 +155,7 @@ jobs:
           bundler: ${{ matrix.bundler || 'default' }}
           cache-version: ${{ matrix.gemfile }}
 
-      - run: bundle update --jobs $(nproc) --retry 3
+      - run: bundle update --all --jobs $(nproc) --retry 3
 
       - run: bundle exec rspec
 
@@ -182,7 +182,7 @@ jobs:
           ruby-version: ruby
           bundler-cache: true
 
-      - run: bundle update --jobs $(nproc) --retry 3
+      - run: bundle update --all --jobs $(nproc) --retry 3
 
       - name: yard generating test
         run: |
