@@ -9,6 +9,9 @@ end
 if Gem::Version.create(RUBY_VERSION) < Gem::Version.create("2.6.0")
   # NOTE: minitest 5.16.0+ requires Ruby 2.6.0+
   gem "minitest", "< 5.16.0"
+
+  # NOTE: mini_mime 1.1.4+ requires Ruby 2.6.0+
+  gem "mini_mime", "< 1.1.4"
 end
 
 if Gem::Version.create(RUBY_VERSION) < Gem::Version.create("2.7.0")
